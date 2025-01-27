@@ -7,7 +7,8 @@ on:
 
 permissions:
   contents: read  # Necessary to read contents from the repository
-  id-token: write  # Grant permission to request ID tokens for authentication
+  id-token: write  # Allow the request of ID tokens for authentication
+  pages: write  # Allow the deployment to GitHub Pages
 
 jobs:
   build:
