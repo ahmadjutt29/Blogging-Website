@@ -1,4 +1,4 @@
-name: Deploy to Development
+name: Deploy to GitHub Pages (Development)
 
 on:
   push:
@@ -19,8 +19,9 @@ jobs:
         with:
           node-version: 16
 
-      - name: Install Parcel
-        run: npm install parcel --save-dev
+      - name: Install dependencies
+        run: |
+          npm install parcel --save-dev
 
       - name: Build Website
         run: npx parcel build src/index.html
@@ -36,5 +37,5 @@ jobs:
     needs: build
 
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         uses: actions/deploy-pages@v4
