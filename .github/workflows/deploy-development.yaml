@@ -1,31 +1,37 @@
-name: Deploy to GitHub Pages
-
+name: wf-develop-deploy
 on:
   push:
-    branches:
+    branches: 
       - develop
 
-permissions:
-  contents: read  # Necessary to read contents from the repository
-  id-token: write  # Allow the request of ID tokens for authentication
-  pages: write  # Allow the deployment to GitHub Pages
-
 jobs:
-  build:
+  build_job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: checkout
+        uses: actions/checkout@v4
 
-      - name: Build the website
+      - name: build using parcel
         run: |
-          npx parcel build src/index.html --dist-dir dist
+          npx parcel build "./src/index.html" --dist-dir "./dist" --public-url "./"
 
-      - name: Upload pages artifact
+      - name: saving artifacts on cloud
         uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
+        with: 
+          path: "./dist"
+          name: "develop-artifact"
 
-      - name: Deploy to GitHub Pages
+  wf-develop-deploy:
+    needs: build_job     
+    permissions:
+      pages: write
+      id-token: write
+    environment: "development-env"
+    runs-on: ubuntu-latest
+    steps:
+      - name: deply build artifacts on github pages
         uses: actions/deploy-pages@v4
+        with: 
+         artifact_name: "develop-artifact"
+         token: ${{github.token}}
