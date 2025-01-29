@@ -50,17 +50,17 @@ h1 {
     text-decoration: none;
 }
 
+.blog-list article p a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
 .blog-list article h2 a:hover {
     color: #4CAF50;
 }
 
 .blog-list article p {
     margin: 0.5rem 0;
-}
-
-.blog-list article p a {
-    color: #4CAF50;
-    text-decoration: none;
 }
 
 footer {
