@@ -19,4 +19,4 @@ jobs:
 
       - name: Build websitegit 
         run: |
-          npx parcel build "./src/index.html" --dist-dir "./dist" --public-url "./"
+          npx parcel build src/index.html
